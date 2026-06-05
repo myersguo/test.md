@@ -1,0 +1,8 @@
+title: TEST.md
+description: A Markdown-first testing contract for coding agents
+baseurl: /test-md
+url: https://myersguo.github.io
+theme: jekyll-theme-primer
+exclude:
+  - cli/node_modules
+  - drafts
