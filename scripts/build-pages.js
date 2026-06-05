@@ -4,7 +4,7 @@ import { Marked } from "marked";
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const OUT = resolve(ROOT, "publish");
-const BASE_URL = "/test-md";
+const BASE_URL = "/test.md";
 
 const marked = new Marked();
 

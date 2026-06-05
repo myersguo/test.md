@@ -51,7 +51,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: https://myersguo.github.io/test-md/
+      url: https://myersguo.github.io/test.md/
     runs-on: ubuntu-latest
     needs: build
     steps:
