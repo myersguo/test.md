@@ -1,0 +1,14 @@
+{
+  "name": "test-md",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate:data": "node cli/bin/testmd.js lint examples/go-api/TEST.md",
+    "build:pages": "node scripts/build-pages.js",
+    "dev": "node scripts/build-pages.js && open publish/index.html"
+  },
+  "devDependencies": {
+    "marked": "^15.0.0"
+  }
+}
