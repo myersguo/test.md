@@ -5,13 +5,13 @@ This example shows how an agent should generate tests from a named commit. It is
 ## User Request
 
 ```text
-根据 impact_agent_api commit f4ee8c95 生成 e2e、ut、smoke test，并优化 TEST.md
+根据 analysis_agent_api commit f4ee8c95 生成 e2e、ut、smoke test，并优化 TEST.md
 ```
 
 ## Repository Context
 
 ```text
-impact_agent_api/
+analysis_agent_api/
   AGENTS.md
   TEST.md
   Makefile
@@ -30,8 +30,8 @@ The agent must read:
 
 1. root `AGENTS.md`
 2. root `TEST.md`, if present
-3. `impact_agent_api/AGENTS.md`
-4. `impact_agent_api/TEST.md`
+3. `analysis_agent_api/AGENTS.md`
+4. `analysis_agent_api/TEST.md`
 
 If the service-level files are missing, create or update them as part of the work before relying on future agent behavior.
 
@@ -88,7 +88,7 @@ Minimum coverage:
 File:
 
 ```text
-impact_agent_api/test/service/impact_detail_service_test.go
+analysis_agent_api/test/service/impact_detail_service_test.go
 ```
 
 Cases:
@@ -109,7 +109,7 @@ Assertions must check ids and response fields, not only result length.
 File:
 
 ```text
-impact_agent_api/test/e2e/impact_detail_e2e_test.go
+analysis_agent_api/test/e2e/impact_detail_e2e_test.go
 ```
 
 Use process-local HTTP:
@@ -134,7 +134,7 @@ Do not call the handler directly in this layer.
 File:
 
 ```text
-impact_agent_api/test/smoke/impact_detail_smoke_test.go
+analysis_agent_api/test/smoke/impact_detail_smoke_test.go
 ```
 
 Smoke request:
@@ -154,7 +154,7 @@ Assert:
 
 ## Commands
 
-Run from `impact_agent_api/`:
+Run from `analysis_agent_api/`:
 
 ```sh
 go test -v ./test/service/...

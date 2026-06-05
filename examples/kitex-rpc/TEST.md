@@ -20,17 +20,17 @@ testGeneration:
 
 # TEST.md
 
-This is a realistic `TEST.md` for a Kitex RPC service named `novel_context_api`. The service exposes context-building methods used by agent workflows.
+This is a realistic `TEST.md` for a Kitex RPC service named `context_service_api`. The service exposes context-building methods used by agent workflows.
 
 ## Repository Shape
 
 ```text
-novel_context_api/
+context_service_api/
   AGENTS.md
   TEST.md
   Makefile
-  idl/novel_context.thrift
-  kitex_gen/novel/context/
+  idl/context_service.thrift
+  kitex_gen/context/service/
   biz/
     handler/context_handler.go
     service/build_context_service.go
@@ -51,7 +51,7 @@ novel_context_api/
 ```md
 ## Testing
 
-Before adding tests for `novel_context_api`, read the nearest `TEST.md`.
+Before adding tests for `context_service_api`, read the nearest `TEST.md`.
 ```
 
 ## Testing Model
@@ -69,7 +69,7 @@ Smoke tests prove the method is reachable through a meaningful RPC boundary or, 
 
 Use Go `testing`, generated Kitex request/response types, and existing `test/testutil` fakes. Do not hand-edit `kitex_gen`. Do not introduce a new mock framework when a local fake client is enough.
 
-IDL is part of the public contract. Changes to `idl/novel_context.thrift` require generated type awareness in tests, even when generated files are not committed in the same diff.
+IDL is part of the public contract. Changes to `idl/context_service.thrift` require generated type awareness in tests, even when generated files are not committed in the same diff.
 
 ## Test Utilities
 
@@ -102,7 +102,7 @@ Keep assertions in the test files. `testutil` can provide typed invocation and f
 For a broad request such as:
 
 ```text
-为 novel_context_api 的 BuildContext 创建完整测试
+为 context_service_api 的 BuildContext 创建完整测试
 ```
 
 Generate this matrix:
@@ -123,7 +123,7 @@ Use handler tests for validation, service tests for feature aggregation, convers
 Example diff:
 
 ```text
-idl/novel_context.thrift adds `optional list<string> evidence_types`
+idl/context_service.thrift adds `optional list<string> evidence_types`
 biz/handler/context_handler.go validates `evidence_types`
 biz/service/build_context_service.go filters evidence by type
 biz/convert/context_response.go returns selected evidence metadata
@@ -222,17 +222,17 @@ Fake clients must model error codes, not just boolean success. Permission denied
 Reject this weak plan:
 
 ```text
-Add one BuildContext service test and static smoke that checks idl/novel_context.thrift exists.
+Add one BuildContext service test and static smoke that checks idl/context_service.thrift exists.
 ```
 
 It misses generated type usage, handler validation, public method invocation, and a meaningful smoke contract.
 
 ## Commands
 
-- Unit: `go test -v ./biz/handler ./biz/service ./biz/convert`, run from `novel_context_api/`.
-- E2E: `go test -v ./test/e2e/...`, run from `novel_context_api/`.
-- Smoke: `go test -v ./test/smoke/...`, run from `novel_context_api/`.
-- All: `make test`, run from `novel_context_api/`.
+- Unit: `go test -v ./biz/handler ./biz/service ./biz/convert`, run from `context_service_api/`.
+- E2E: `go test -v ./test/e2e/...`, run from `context_service_api/`.
+- Smoke: `go test -v ./test/smoke/...`, run from `context_service_api/`.
+- All: `make test`, run from `context_service_api/`.
 
 ## Reporting
 

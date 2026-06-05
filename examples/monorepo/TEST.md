@@ -18,31 +18,31 @@ testGeneration:
 
 # TEST.md
 
-This is a realistic repository-level `TEST.md` for a monorepo named `novel-qa-monorepo`. It contains multiple backend services, frontend packages, shared libraries, and generated contracts.
+This is a realistic repository-level `TEST.md` for a monorepo named `acme-monorepo`. It contains multiple backend services, frontend packages, shared libraries, and generated contracts.
 
 ## Repository Shape
 
 ```text
-novel-qa-monorepo/
+acme-monorepo/
   AGENTS.md
   TEST.md
   Makefile
-  common_agent_api/
-  doc_agent_api/
-  impact_agent_api/
+  shared_agent_api/
+  docs_agent_api/
+  analysis_agent_api/
     AGENTS.md
     TEST.md
     biz/
     test/
       testutil/
-  novel_context_api/
+  context_service_api/
     AGENTS.md
     TEST.md
     idl/
     biz/
     test/
       testutil/
-  risk_agent_web/
+  review_agent_web/
     package.json
     TEST.md
   common/
@@ -108,10 +108,10 @@ Rules:
 For a request such as:
 
 ```text
-为 impact_agent_api 创建完整 e2e、ut、smoke test
+为 analysis_agent_api 创建完整 e2e、ut、smoke test
 ```
 
-Do not test the entire monorepo. Scope to `impact_agent_api`, read `impact_agent_api/TEST.md` when present, then build a service-specific matrix. The root only supplies fallback expectations:
+Do not test the entire monorepo. Scope to `analysis_agent_api`, read `analysis_agent_api/TEST.md` when present, then build a service-specific matrix. The root only supplies fallback expectations:
 
 - unit coverage for service logic and shared helper use
 - entrypoint e2e for API or RPC behavior
@@ -123,7 +123,7 @@ Do not test the entire monorepo. Scope to `impact_agent_api`, read `impact_agent
 For a request such as:
 
 ```text
-根据 impact_agent_api commit f4ee8c95 生成测试
+根据 analysis_agent_api commit f4ee8c95 生成测试
 ```
 
 Required root workflow:
@@ -155,10 +155,10 @@ For a bug report spanning services, reproduce at the smallest service boundary f
 
 | Changed Path | Scope | Required Action |
 | --- | --- | --- |
-| `impact_agent_api/biz/service/...` | service | use `impact_agent_api/TEST.md` |
-| `novel_context_api/idl/...` | service entrypoint | IDL contract + RPC e2e + smoke |
+| `analysis_agent_api/biz/service/...` | service | use `analysis_agent_api/TEST.md` |
+| `context_service_api/idl/...` | service entrypoint | IDL contract + RPC e2e + smoke |
 | `common/auth/...` | cross-service | direct common tests + affected service tests |
-| `risk_agent_web/src/...` | frontend package | package tests + route smoke if public |
+| `review_agent_web/src/...` | frontend package | package tests + route smoke if public |
 | root `Makefile` | repository | command smoke and docs update |
 
 When multiple services are affected, final reports must name each service and whether tests were added, existing tests were sufficient, or coverage could not be run.
@@ -171,8 +171,8 @@ Root smoke may fan out to service smoke commands:
 
 ```makefile
 test-smoke:
-	$(MAKE) -C impact_agent_api test-smoke
-	$(MAKE) -C novel_context_api test-smoke
+	$(MAKE) -C analysis_agent_api test-smoke
+	$(MAKE) -C context_service_api test-smoke
 ```
 
 Do not use root smoke as a substitute for a feature smoke inside the affected service.
